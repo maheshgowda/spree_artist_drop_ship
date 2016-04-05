@@ -36,9 +36,9 @@ es:
             url:
               invalid: es inválido. Por favor asegúrece que 'http://' esté incluido
               not_responding: 'es inválido, no responde o ha redireccionado a otra url'
-  artist_drop_ship_order_number: "Drop Ship Orden #%{number}"
-  artist_drop_ship_orders: Drop Ship Ordenes
-  artist_drop_ship_settings: Drop Ship Configuración
+  artist_drop_ship_order_number: "Artist Drop Ship Orden #%{number}"
+  artist_drop_ship_orders: Artist Drop Ship Ordenes
+  artist_drop_ship_settings: Artist Drop Ship Configuración
   must_be_logged_in: 'Debe Estar Autenticado'
   signup: Registro
   signup_to_become_a_artist: 'Autentíquese para ser un Proveedor'
@@ -46,7 +46,7 @@ es:
     admin:
       artist_drop_ship_settings:
         update:
-          success: Configuración Drop ship actualizada correctamente
+          success: Configuración Artist Drop ship actualizada correctamente
       orders:
         artist_drop_ship_order_order_header:
           artist_drop_ship_order_ids: DSO IDs
@@ -79,7 +79,7 @@ es:
     company_info: Informacion de la compañia
     confirm_order: Confirmar Orden
     contact_address: Dirección de contacto
-    artist_drop_ship: Drop Ship
+    artist_drop_ship: Artist Drop Ship
     editing_artist: Editar proveedor
     default_commission_flat_rate: Comision por defecto
     default_commission_percentage: Porcentaje de comision por defecto
