@@ -2,19 +2,19 @@ require 'spec_helper'
 
 describe Spree::Order do
 
-  context '#finalize_with_drop_ship!' do
+  context '#finalize_with_artist_drop_ship!' do
 
     after do
-      SpreeDropShip::Config[:send_artist_email] = true
+      SpreeArtistDropShip::Config[:send_artist_email] = true
     end
 
-    it 'should deliver drop ship orders when Spree::DropShipConfig[:send_artist_email] == true' do
+    it 'should deliver artist drop ship orders when Spree::ArtistDropShipConfig[:send_artist_email] == true' do
       order = create(:order_with_totals, ship_address: create(:address))
       order.line_items = [create(:line_item, variant: create(:variant_with_artist)), create(:line_item, variant: create(:variant_with_artist))]
       order.create_proposed_shipments
 
       order.shipments.each do |shipment|
-        Spree::DropShipOrderMailer.should_receive(:artist_order).with(shipment.id).and_return(double(Mail, :deliver! => true))
+        Spree::ArtistDropShipOrderMailer.should_receive(:artist_order).with(shipment.id).and_return(double(Mail, :deliver! => true))
       end
 
       order.finalize!
@@ -28,14 +28,14 @@ describe Spree::Order do
       end
     end
 
-    it 'should NOT deliver drop ship orders when Spree::DropShipConfig[:send_artist_email] == false' do
-      SpreeDropShip::Config[:send_artist_email] = false
+    it 'should NOT deliver artist drop ship orders when Spree::ArtistDropShipConfig[:send_artist_email] == false' do
+      SpreeArtistDropShip::Config[:send_artist_email] = false
       order = create(:order_with_totals, ship_address: create(:address))
       order.line_items = [create(:line_item, variant: create(:variant_with_artist)), create(:line_item, variant: create(:variant_with_artist))]
       order.create_proposed_shipments
 
       order.shipments.each do |shipment|
-        Spree::DropShipOrderMailer.should_not_receive(:artist_order).with(shipment.id)
+        Spree::ArtistDropShipOrderMailer.should_not_receive(:artist_order).with(shipment.id)
       end
 
       order.finalize!

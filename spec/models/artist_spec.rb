@@ -53,7 +53,7 @@ describe Spree::Artist do
   context '#send_welcome' do
 
     after do
-      SpreeDropShip::Config[:send_artist_email] = true
+      SpreeArtistDropShip::Config[:send_artist_email] = true
     end
 
     before do
@@ -61,10 +61,10 @@ describe Spree::Artist do
       @mail_message = double('Mail::Message')
     end
 
-    context 'with Spree::DropShipConfig[:send_artist_email] == false' do
+    context 'with Spree::ArtistDropShipConfig[:send_artist_email] == false' do
 
       it 'should not send' do
-        SpreeDropShip::Config[:send_artist_email] = false
+        SpreeArtistDropShip::Config[:send_artist_email] = false
         expect {
           Spree::ArtistMailer.should_not_receive(:welcome).with(an_instance_of(Integer))
         }
@@ -73,7 +73,7 @@ describe Spree::Artist do
 
     end
 
-    context 'with Spree::DropShipConfig[:send_artist_email] == true' do
+    context 'with Spree::ArtistDropShipConfig[:send_artist_email] == true' do
 
       it 'should send welcome email' do
         expect {
@@ -87,11 +87,11 @@ describe Spree::Artist do
   end
 
   it '#set_commission' do
-    SpreeDropShip::Config.set default_commission_flat_rate: 1
-    SpreeDropShip::Config.set default_commission_percentage: 1
+    SpreeArtistDropShip::Config.set default_commission_flat_rate: 1
+    SpreeArtistDropShip::Config.set default_commission_percentage: 1
     artist = create :artist
-    SpreeDropShip::Config.set default_commission_flat_rate: 0
-    SpreeDropShip::Config.set default_commission_percentage: 0
+    SpreeArtistDropShip::Config.set default_commission_flat_rate: 0
+    SpreeArtistDropShip::Config.set default_commission_percentage: 0
     # Default configuration is 0.0 for each.
     artist.commission_flat_rate.to_f.should eql(1.0)
     artist.commission_percentage.to_f.should eql(1.0)

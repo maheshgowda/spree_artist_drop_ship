@@ -58,7 +58,7 @@ describe Spree::ArtistAbility do
     context 'requested by artists user' do
       context 'when order is complete' do
         let(:resource) {
-          order = create(:completed_order_for_drop_ship_with_totals)
+          order = create(:completed_order_for_artist_drop_ship_with_totals)
           order.stock_locations.first.update_attribute :artist, user.artist
           Spree::Shipment.new({order: order, stock_location: order.stock_locations.first }, without_protection: true)
         }
